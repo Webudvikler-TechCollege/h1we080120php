@@ -1,8 +1,15 @@
 <?php
 /**
- * @Description of classloader
- * Uses the Standard PHP Library (SPL) function
- * spl_autoload_register
+ * Classloader
+ * 
+ * Fed lille funktion som sparer dig for en masse include helvede!
+ * 
+ * Bruger PHP's Standard Library (SPL) function spl_autoload_register
+ * til at opsnappe en klasse når den kaldes og derefter kigge 
+ * efter den og registrere den i en af core mapperne.
+ * 
+ * Funktionen betinger at dit klassenavn hedder det samme som din klassefil.
+ * Eks. fil med klasse User skal hedder user.php
  */
 spl_autoload_register(function ($class) {
 	// Sætter array med stier til klassemapper
