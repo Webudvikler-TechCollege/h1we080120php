@@ -2,7 +2,7 @@
 $strPageTitle = 'Forside';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/incl/header.php';
 
-$dns = "mysql: host=localhost;dbname=songbook;charset=utf8";
+$dns = "mysql:host=localhost;dbname=songbook;charset=utf8";
 $username = "heka";
 $password = "password";
 
