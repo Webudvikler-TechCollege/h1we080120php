@@ -12,3 +12,6 @@ define("COREROOT", substr(DOCROOT, 0, strrpos(DOCROOT,"/")) . "/core/");
 // Inkludere class loader
 require_once COREROOT . 'classes/autoload.php';
 
+// Kalder database objekt
+$db = new dbconf();
+
