@@ -1,1 +1,9 @@
-/* No CSS *//*# sourceMappingURL=style.css.map */
+form div {
+  margin-bottom: 10px;
+}
+
+form label {
+  width: 80px;
+  display: inline-block;
+}
+/*# sourceMappingURL=style.css.map */

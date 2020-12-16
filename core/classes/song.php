@@ -4,14 +4,17 @@
  */
 class Song {
     private $db; // Private db class property
+
+    public $id;
     public $title;
-    public $artist;
+    public $content;
+    public $genre_id;
 
     // Constructor
     // Metode der auto eksekveres når der kaldes en instans af klassen
     public function __construct() {
         global $db; // Globaliserer det globale db objekt så det er synligt i denne metode
-        $this->db = $db; // Peger class member db objekt til det globale db objekt 
+        $this->db = $db; // Peger class member db objekt til det globale db objekt        
     }
 
     // List
@@ -56,11 +59,14 @@ class Song {
 
     }    
     
-    public function create($title, $content, $genre_id) {
+    /**
+     * CREATE Metode: OPretter ny sang ud fra POST vars
+     */
+    public function create() {
         $params = array(
-            "title" => array($title, PDO::PARAM_STR),
-            "content" => array($content, PDO::PARAM_STR),
-            "genre_id" => array($genre_id, PDO::PARAM_INT)
+            "title" => array($this->title, PDO::PARAM_STR),
+            "content" => array($this->content, PDO::PARAM_STR),
+            "genre_id" => array($this->genre_id, PDO::PARAM_INT)
         );
 
         $sql = "INSERT INTO song(title, content, genre_id) " . 
@@ -68,10 +74,6 @@ class Song {
         if($this->db->query($sql, $params)) {
             return $this->db->lastInsertId();
         }
-    }
-
-    public function update() {
-
     }
     
     /**
