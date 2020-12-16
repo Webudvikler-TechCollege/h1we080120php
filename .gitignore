@@ -1,7 +1,5 @@
 /core/userapp*
 
 # Routing
-.htaccess
-/public_html/api*
-/core/classes/route.php
+/public_html/router-setup*
 

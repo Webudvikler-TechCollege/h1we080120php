@@ -14,4 +14,3 @@ require_once COREROOT . 'classes/autoload.php';
 
 // Kalder database objekt
 $db = new dbconf();
-

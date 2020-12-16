@@ -39,7 +39,7 @@ $song = new Song(); // Opretter instans af klassen
 $title = "To mus i en spand";
 $content = "Der sad tio mus i en spand";
 $genre_id = 1;
-$song->create($title, $content, $genre_id);
+echo $song->create($title, $content, $genre_id);
 /**
  * Sletter sang ud fra id (GET)
  */
