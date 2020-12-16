@@ -31,6 +31,10 @@ class Song {
         return $this->db->query($sql);
     }
 
+    /**
+     * GET Metode: Henter sang ud fra id
+     * @param int $id
+     */
     public function get($id) {
         $params = array(
             "id" => array($id, PDO::PARAM_INT)
@@ -61,14 +65,19 @@ class Song {
 
         $sql = "INSERT INTO song(title, content, genre_id) " . 
                 "VALUES(:title, :content, :genre_id)";
-        $this->db->query($sql, $params);
-        return $this->db->lastInsertId();
+        if($this->db->query($sql, $params)) {
+            return $this->db->lastInsertId();
+        }
     }
 
     public function update() {
 
     }
     
+    /**
+     * DELETE Metode: Sletter sang ud fra id
+     * @param int $id
+     */    
     public function delete($id) {
         $params = array(
             "id" => array($id, PDO::PARAM_INT)

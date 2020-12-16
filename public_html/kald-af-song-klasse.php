@@ -10,6 +10,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/incl/init.php';
  * Sidens titel sendes med som argument
  */
 Tool::Header('Eksempel på brug af en sang klasse');
+
+/**
+ * Henter id fra GET param. Sættes til 0 hvis det ikke findes
+ */
 $id = (isset($_GET["id"]) && !empty($_GET["id"])) ? $_GET["id"] : 0;
 
 /**
@@ -35,8 +39,7 @@ $song = new Song(); // Opretter instans af klassen
 $title = "To mus i en spand";
 $content = "Der sad tio mus i en spand";
 $genre_id = 1;
-//echo $song->create($title, $content, $genre_id);
-
+$song->create($title, $content, $genre_id);
 /**
  * Sletter sang ud fra id (GET)
  */
