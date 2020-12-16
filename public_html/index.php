@@ -1,30 +1,37 @@
 <?php
-$strPageTitle = 'Forside';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/incl/header.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/incl/init.php';
 
-$dns = "mysql:host=localhost;dbname=songbook;charset=utf8";
-$username = "heka";
-$password = "password";
 
-try {
-    
-    $db = new PDO($dns, $username, $password);
+// Base Route til sang liste
+Route::add('/songs', function () {
+    $song = new Song;
+    $data = $song->list();
+    echo json_encode($data);
+});
 
-    $id = (int)$_GET["id"];
+// Sang detaljer
+Route::add('/song/([0-9]*)', function ($id) {
     var_dump($id);
+});
 
-    $sql = "SELECT * FROM song WHERE id = :id";
-    $stm = $db->prepare($sql);
-    $stm->bindParam(":id", $id);
-    $stm->execute();
-    $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+// Post route example
+Route::add('/song/form', function () {
+    echo '<form method="post">';
+    echo '<label for="title">Titel:</label><input type="text" name="title" id="title" />';
+    echo '<label for="content">Tekst:</label><textarea name="content" id="content"></textarea>';
+    echo '<input type="submit" value="send" />';
+    echo '</form>';
+}, 'get');
 
-    var_dump($result);
+// Post route example
+Route::add('/song/form', function () {
+    echo 'Hey! The form has been sent:<br/>';
+    print_r($_POST);
+}, 'post');
 
-    $db = null;
+// Accept only numbers as parameter. Other characters will result in a 404 error
+Route::add('/foo/([0-9]*)/bar', function ($var1) {
+    echo $var1 . ' is a great number!';
+});
 
-} catch(PDOException $error) {
-    echo 'Fejl i tilslutning til database: ' . $error;
-}
-
-require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/incl/footer.php';
+Route::run('/');

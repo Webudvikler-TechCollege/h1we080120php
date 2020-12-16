@@ -1,1 +1,7 @@
 /core/userapp*
+
+# Routing
+.htaccess
+/public_html/api*
+/core/classes/route.php
+

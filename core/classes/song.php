@@ -17,14 +17,64 @@ class Song {
     // List
     // Metode der returnerer et array med rækker 
     public function list() {
-        $sql = "SELECT * FROM song";
+        $sql = 'SELECT s.id, s.title, s.content, g.title AS genre_title, name    
+                FROM song s 
+                JOIN genre g 
+                ON s.genre_id = g.id 
+                JOIN song_album_rel x 
+                ON s.id = x.song_id 
+                JOIN album a 
+                ON x.album_id = a.id 
+                JOIN artist ar  
+                ON a.artist_id = ar.id 
+                ';
         return $this->db->query($sql);
+    }
+
+    public function get($id) {
+        $params = array(
+            "id" => array($id, PDO::PARAM_INT)
+        );
+
+        $sql = 'SELECT s.id, s.title, s.content, g.title AS genre_title, name    
+                FROM song s 
+                JOIN genre g 
+                ON s.genre_id = g.id 
+                JOIN song_album_rel x 
+                ON s.id = x.song_id 
+                JOIN album a 
+                ON x.album_id = a.id 
+                JOIN artist ar  
+                ON a.artist_id = ar.id 
+                WHERE s.id = :id
+                ';
+        return $this->db->query($sql, $params);
+
     }    
+    
+    public function create($title, $content, $genre_id) {
+        $params = array(
+            "title" => array($title, PDO::PARAM_STR),
+            "content" => array($content, PDO::PARAM_STR),
+            "genre_id" => array($genre_id, PDO::PARAM_INT)
+        );
 
-    // Dummy Metode til at illustrere hvordan en klasse virker
-    public function showMeProps() {
-        echo "<h1>" . $this->title . "</h1>";
-        echo "<h2>" . $this->artist . "</h2>";
+        $sql = "INSERT INTO song(title, content, genre_id) " . 
+                "VALUES(:title, :content, :genre_id)";
+        $this->db->query($sql, $params);
+        return $this->db->lastInsertId();
+    }
 
+    public function update() {
+
+    }
+    
+    public function delete($id) {
+        $params = array(
+            "id" => array($id, PDO::PARAM_INT)
+        );
+
+        $sql = "DELETE FROM song WHERE id = :id";
+        return $this->db->query($sql, $params);
     }
 }
