@@ -21,4 +21,21 @@ class Genre {
                 ';
         return $this->db->query($sql);
     }
+
+    /**
+     * GET Metode: Henter genre ud fra id
+     * @param int $id
+     */
+    public function get($id) {
+        $params = array(
+            "id" => array($id, PDO::PARAM_INT)
+        );
+
+        $sql = 'SELECT id, title
+                FROM genre 
+                WHERE id = :id
+                ';
+        return $this->db->query($sql, $params);
+
+    }      
 }
