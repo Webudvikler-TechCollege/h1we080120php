@@ -1,4 +1,7 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/incl/init.php';
+
+Tool::Header('PDO');
 /**
  * Sætter DB Credentials
  */
@@ -15,10 +18,12 @@ try {
     $db = new PDO($dns, $username, $password);
 
     // Henter og typecaster GET parameter id som et tal
-    $id = (int)$_GET["id"];
+    $id = (isset($_GET["id"]) && !empty($_GET["id"])) ? (int)$_GET["id"] : 0;
 
     // SQL Query
-    $sql = "SELECT * FROM song WHERE id = :id";
+    $sql = "SELECT * FROM song";
+    // SQL Query med parametre
+    //$sql = "SELECT * FROM song WHERE id = :id";
     // Prepare statement
     $stm = $db->prepare($sql);
     // Binder parametre
@@ -35,3 +40,5 @@ try {
 } catch(PDOException $error) {
     echo 'Fejl i tilslutning til database: ' . $error;
 }
+
+Tool::Footer();

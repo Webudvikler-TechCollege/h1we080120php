@@ -3,6 +3,7 @@
  * init.php indeholder core features som autoloader, db objekt m.m.
  */
 require_once $_SERVER['DOCUMENT_ROOT'] . '/assets/incl/init.php';
+Tool::Header('DB Klasse');
 
 /**
  * Eksempel på db liste udtræk uden parametre
@@ -27,3 +28,5 @@ var_dump($row2);
 $sql3 = "SELECT title FROM song WHERE id = :id";
 $row3 = $db->query($sql3, $params, Db::RESULT_VALUE);
 echo $row3;
+
+Tool::Footer();

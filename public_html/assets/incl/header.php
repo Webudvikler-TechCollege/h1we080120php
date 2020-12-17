@@ -7,9 +7,7 @@
 </head>
 <body>
     <nav>
-        <a href="/">Forside</a>
-        <a href="about.php">Om os</a>
-        <a href="contact.php">Kontakt</a>
+        <?php require_once DOCROOT . '/assets/incl/nav.php' ?>
     </nav>
 
     <main>
